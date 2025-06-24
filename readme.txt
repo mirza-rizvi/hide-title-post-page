@@ -6,7 +6,7 @@ Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
 Author: Mirza Rizvi Amin
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,8 @@ The Hide Title Post Page plugin adds a lightweight meta box to posts and pages t
 1. Hide Title meta box in the post edit screen.
 
 == Changelog ==
+1.1
+- Refactored the plugin structure into modular classes and moved files to the `includes` directory.
 1.0
 - Initial release.
 
