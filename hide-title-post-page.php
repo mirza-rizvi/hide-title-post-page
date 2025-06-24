@@ -36,6 +36,7 @@ class Hide_Title_Plugin {
     public function hide_title_meta_box_callback($post) {
         $hide_title = get_post_meta($post->ID, 'hide_title', true);
         ?>
+        <?php wp_nonce_field('hide_title_nonce_action', 'hide_title_nonce'); ?>
         <label for="hide_title">
             <input type="checkbox" name="hide_title" id="hide_title" value="1" <?php checked(1, $hide_title, true); ?>>
             Hide the title tag on this post or page
@@ -44,6 +45,10 @@ class Hide_Title_Plugin {
     }
 
     public function save_hide_title_meta_box($post_id) {
+        if (!isset($_POST['hide_title_nonce']) ||
+            !wp_verify_nonce($_POST['hide_title_nonce'], 'hide_title_nonce_action')) {
+            return;
+        }
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return;
         }
@@ -58,12 +63,19 @@ class Hide_Title_Plugin {
     }
 
     public function hide_title($title, $id = null) {
+        if (is_admin()) {
+            return $title;
+        }
+
+        $post_id = $id ? $id : get_the_ID();
+
         if (is_single() || is_page()) {
-            $hide_title = get_post_meta(get_the_ID(), 'hide_title', true);
+            $hide_title = get_post_meta($post_id, 'hide_title', true);
             if ($hide_title) {
                 return '';
             }
         }
+
         return $title;
     }
 }
