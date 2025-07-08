@@ -10,6 +10,7 @@ This repository contains the source code for the **Hide Title Post Page** WordPr
 - Adds a "Hide Title" meta box to post and page edit screens.
 - Stores a per‑post setting in post meta when the checkbox is selected.
 - Filters the post title on the front end so that the tag is removed when the setting is enabled.
+- Translation files are located in the `languages/` directory.
 
 ## Installation
 
