@@ -16,6 +16,14 @@ define( 'HTPP_URL', plugin_dir_url( __FILE__ ) );
 
 require_once HTPP_PATH . 'includes/class-hide-title-plugin.php';
 
+/**
+ * Bootstrap the Hide Title Post Page plugin.
+ *
+ * Creates an instance of the main plugin class and executes it after all
+ * other plugins have loaded.
+ *
+ * @return void
+ */
 function htpp_run_plugin() {
     $plugin = new Hide_Title_Plugin();
     $plugin->run();

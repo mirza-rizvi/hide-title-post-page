@@ -3,13 +3,26 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+/**
+ * Registers and renders the Hide Title meta box.
+ */
 class Hide_Title_Meta_Box {
 
+    /**
+     * Hook the meta box and save actions into WordPress.
+     *
+     * @return void
+     */
     public function register() {
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
         add_action( 'save_post', array( $this, 'save_meta_box' ) );
     }
 
+    /**
+     * Add the meta box to supported post types.
+     *
+     * @return void
+     */
     public function add_meta_boxes() {
         add_meta_box(
             'hide_title_meta_box',
@@ -21,6 +34,12 @@ class Hide_Title_Meta_Box {
         );
     }
 
+    /**
+     * Output the meta box markup.
+     *
+     * @param WP_Post $post Current post object.
+     * @return void
+     */
     public function render_meta_box( $post ) {
         $hide_title = get_post_meta( $post->ID, 'hide_title', true );
         wp_nonce_field( 'hide_title_nonce_action', 'hide_title_nonce' );
@@ -32,6 +51,12 @@ class Hide_Title_Meta_Box {
         <?php
     }
 
+    /**
+     * Persist the meta box setting when the post is saved.
+     *
+     * @param int $post_id Post ID being saved.
+     * @return void
+     */
     public function save_meta_box( $post_id ) {
         if ( ! isset( $_POST['hide_title_nonce'] ) || ! wp_verify_nonce( $_POST['hide_title_nonce'], 'hide_title_nonce_action' ) ) {
             return;
