@@ -19,15 +19,15 @@ add_action( 'plugins_loaded', 'htpp_run_plugin' );
 
 ## `Hide_Title_Plugin`
 
-Located in `includes/class-hide-title-plugin.php`, this class orchestrates the plugin by registering the meta box and filtering titles on the front end.
+Located in `includes/class-hide-title-plugin.php`, this class orchestrates the plugin by loading the feature classes and registering their hooks.
 
 ### Key Methods
 
-- `__construct()` – Loads the `Hide_Title_Meta_Box` class.
-- `run()` – Hooks the meta box into WordPress and adds a filter to modify the post title output.
-- `filter_title( $title, $id = null )` – Checks the post meta and returns an empty string if the title should be hidden.
+- `__construct()` – Loads the `Hide_Title_Meta_Box` and `Hide_Title_Filter` classes.
+- `run()` – Hooks the meta box and title filter into WordPress.
 
 ````php
+// within Hide_Title_Filter
 public function filter_title( $title, $id = null ) {
     if ( is_admin() ) {
         return $title;
@@ -46,6 +46,14 @@ public function filter_title( $title, $id = null ) {
 }
 ````
 
+## `Hide_Title_Filter`
+
+Defined in `includes/class-title-filter.php`, this class is responsible for removing the post title on the front end when the meta value is set.
+
+### Hooks
+
+- `the_title` – Filters the post title output.
+
 ## `Hide_Title_Meta_Box`
 
 Defined in `includes/admin/class-meta-box.php`, this class is responsible for rendering and saving the meta box.
@@ -59,7 +67,7 @@ Defined in `includes/admin/class-meta-box.php`, this class is responsible for re
 
 1. When editing a post or page, the meta box labeled **Hide Title** appears in the sidebar.
 2. Checking the box stores a `hide_title` value of `1` in the post's metadata.
-3. The `Hide_Title_Plugin::filter_title` method checks this value and removes the title from the front end when set.
+3. The `Hide_Title_Filter::filter_title` method checks this value and removes the title from the front end when set.
 
 ## Example Scenario
 

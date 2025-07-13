@@ -2,7 +2,7 @@
 
 This repository contains the source code for the **Hide Title Post Page** WordPress plugin. The plugin allows authors to hide the title on individual posts or pages through a simple meta box in the editor.
 
-- **Version:** 1.1
+- **Version:** 1.2
 - **License:** GPLv2 or later
 
 ## Features
