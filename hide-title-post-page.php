@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Hide Title Post Page
  * Description: Allows authors to hide the title tag on single pages and posts via the edit post screen.
- * Version: 1.1
+ * Version: 1.2
  * Author: Mirza Rizvi Amin
  * Text Domain: hide-title-post-page
  */
